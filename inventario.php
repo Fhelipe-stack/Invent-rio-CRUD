@@ -80,7 +80,6 @@
         ul {
             list-style-type: none; 
             padding: 10px;
-            display: flex;
             justify-content: space-between;
         }
 
@@ -95,6 +94,11 @@
             margin: 20px auto;
             position: relative;
         }
+
+        .item-row {
+          display: flex;
+        }
+
     </style>
 </head>
 <body>
@@ -133,27 +137,41 @@
 </div>
 
 <div class="container">
-    <div class="divlogin">
-        <h1>Inventário</h1>
-        <ul>
-            <?php foreach ($itens as $item): ?>
-                <?php
-                    preg_match('/Item: (.*), Quantidade: (\d+), Imagem: (.*)/', $item, $matches);
-                    if (count($matches) === 4):
-                        $nomeItem = $matches[1];
-                        $quantidade = $matches[2];
-                        $imagem = $matches[3];
-                ?>
-                    <li class="list-group-item inventory-item">
-                        <img src="<?php echo $imagem; ?>" alt="<?php echo $nomeItem; ?>">
-                        <span class="quantity" style="color: white;">x<?php echo $quantidade; ?></span>
-                    </li>
-                    
-                <?php endif; ?>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+<div class="divlogin">
+    <h1>Inventário</h1>
+    <?php
+    $contador = 0;
+
+    foreach ($itens as $index => $item) {
+        preg_match('/Item: (.*), Quantidade: (\d+), Imagem: (.*)/', $item, $matches);
+
+        if (count($matches) === 4) {
+            $nomeItem = $matches[1];
+            $quantidade = $matches[2];
+            $imagem = $matches[3];
+
+            if ($contador % 5 == 0) {
+                if ($contador > 0) {
+                    echo '</ul>';
+                }
+                echo '<ul class="item-row">';
+            }
+            ?>
+            <li class="list-group-item inventory-item">
+                <img src="<?php echo $imagem; ?>" alt="<?php echo $nomeItem; ?>">
+                <span class="quantity" style="color: white;">x<?php echo $quantidade; ?></span>
+            </li>
+            <?php
+            $contador++;
+        }
+    }
+
+    if ($contador > 0) {
+        echo '</ul>';
+    }
+    ?>
 </div>
+
 <div class="edit">
         <a class="nav-link text-white" href="editar_deletar.php">Editar / Deletar</a>
 </div>
