@@ -1,0 +1,2 @@
+Item: Bota de ouro, Quantidade: 2, Imagem: https://art.pixilart.com/04d5ccdc098f58e.png
+Item: Capacete de ferro, Quantidade: 2, Imagem: https://th.bing.com/th/id/OIP.BpGE2hu8cuZqbkvfo409sgAAAA?rs=1&pid=ImgDetMain
